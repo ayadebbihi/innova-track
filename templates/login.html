@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-container fade-in">
+
+    <div class="auth-card glass-card">
+        <h2 class="auth-title">Welcome Back</h2>
+        <p class="auth-subtitle">Please log in to continue</p>
+
+        <form action="/login" method="POST">
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control auth-input" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" class="form-control auth-input" required>
+            </div>
+
+            <button class="btn btn-primary auth-btn w-100">Login</button>
+
+        </form>
+
+        <div class="auth-links">
+            <p>Don't have an account?</p>
+            <a href="/register">Create a new account</a>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}
+

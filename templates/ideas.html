@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="ideas-header d-flex justify-content-between align-items-center mb-4 ">
+    <h2 class="page-title " >💡 All Ideas</h2>
+
+    {% if session.get("role") != "reviewer" %}
+    <a href="/submit" class="btn btn-primary shadow-sm idea-btn">
+        + Submit New Idea
+    </a>
+    {% endif %}
+</div>
+
+<!-- Search Bar -->
+<div class="search-container mb-4">
+    <form method="GET" action="/ideas" class="d-flex">
+        <input type="text" name="search" class="form-control search-input"
+               placeholder="Search ideas..." value="{{ request.args.get('search', '') }}">
+        <button class="btn btn-primary ms-2">Search</button>
+    </form>
+</div>
+
+<!-- Ideas Grid -->
+<div class="row g-4">
+
+    {% for idea in ideas %}
+    <div class="col-md-6 col-lg-4">
+        <div class="idea-card shadow-sm">
+
+            <div class="idea-card-header">
+                <h5 class="idea-title">{{ idea.title }}</h5>
+                <span class="idea-category">{{ idea.category }}</span>
+            </div>
+
+            
+            <div class="idea-footer d-flex justify-content-between align-items-center">
+                <div class="idea-score">
+                    ⭐  {{ idea.stars }}/5
+
+                </div>
+
+                <a href="/ideas/{{ idea.id }}" class="btn btn-outline-primary btn-sm view-btn">
+                    View Details →
+                </a>
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+{% endblock %}

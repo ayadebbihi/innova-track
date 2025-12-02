@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title mb-4 text-center">📂 Manage Categories</h2>
+
+<div class="container fade-in">
+
+    <div class="d-flex justify-content-between mb-4">
+        <h4>Your Categories</h4>
+        <a href="/add_category" class="btn btn-primary rounded-3 shadow-sm">
+            ➕ Add Category
+        </a>
+    </div>
+
+    <div class="row g-4">
+
+        {% for cat in categories %}
+        <div class="col-md-6 col-lg-4">
+            <div class="category-card shadow-sm p-3 rounded-4">
+
+                <h5 class="fw-bold">{{ cat.name }}</h5>
+
+                <div class="d-flex justify-content-end mt-3">
+                    <form action="/delete_category/{{ cat.category_id }}" method="POST"
+                          onsubmit="return confirm('Delete this category?');">
+                        <button class="btn btn-danger btn-sm rounded-3">
+                            Delete
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        {% endfor %}
+
+        {% if categories|length == 0 %}
+            <p class="text-center text-muted">No categories found.</p>
+        {% endif %}
+
+    </div>
+</div>
+{% if error %}
+<div class="alert alert-danger mb-3">
+    {{ error }}
+</div>
+{% endif %}
+
+{% endblock %}

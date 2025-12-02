@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="auth-container fade-in">
+
+    <div class="auth-card glass-card">
+        <h2 class="auth-title">Create Account</h2>
+        <p class="auth-subtitle">Join our innovation community</p>
+{% if weak_msg %}
+<p class="alert alert-danger text-center">{{ weak_msg }}</p>
+{% endif %}
+
+{% if error %}
+<p class="alert alert-danger text-center">{{ error }}</p>
+{% endif %}
+
+        <form action="/register" method="POST">
+
+            <div class="mb-3">
+                <label>Username</label>
+                <input type="text" name="username" class="form-control auth-input" value="{{ username if username else '' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Email</label>
+                <input type="email" name="email" class="form-control auth-input" value="{{ email if email else '' }}" required>
+            </div>
+
+            <div class="mb-3">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password"
+                  class="form-control auth-input" required>
+            </div>
+ <div id="passMsg" class="text-danger mb-2" style="font-size:14px;"></div>
+            <button class="btn btn-primary auth-btn w-100">Register</button>
+
+        </form>
+
+        <div class="auth-links">
+            <p>Already have an account?</p>
+            <a href="/login">Login here</a>
+        
+        </div>
+
+    </div>
+</div>
+<script>
+const passwordInput = document.getElementById("password");
+const msg = document.getElementById("passMsg");
+
+passwordInput.addEventListener("input", function () {
+    const pass = passwordInput.value;
+
+    if (pass.length < 6) {
+        msg.textContent = "Password must be at least 6 characters.";
+        msg.style.color = "red";
+        return;
+    }
+    if (!/[A-Z]/.test(pass)) {
+        msg.textContent = "Password must include at least one uppercase letter.";
+        msg.style.color = "red";
+        return;
+    }
+    if (!/[0-9]/.test(pass)) {
+        msg.textContent = "Password must include at least one number.";
+        msg.style.color = "red";
+        return;
+    }
+    if (!/[^A-Za-z0-9]/.test(pass)) {
+        msg.textContent = "Password must include at least one symbol.";
+        msg.style.color = "red";
+        return;
+    }
+
+    // إذا كان كل شيء جيد
+    msg.textContent = "✔ Strong password!";
+    msg.style.color = "green";
+});
+</script>
+
+{% endblock %}

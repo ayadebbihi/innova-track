@@ -1,0 +1,658 @@
+
+/* ===============================
+   GLOBAL
+=============================== */
+body {
+    margin: 0;
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    background: #f5f7fa;
+    transition: background 0.3s, color 0.3s;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.dark-mode {
+    background: #121212;
+    color: #e3e3e3;
+}
+
+/* ===============================
+   HEADER
+=============================== */
+.site-header {
+    background: #1f1f1f;
+    padding: 15px 20px;
+}
+
+.site-header nav a {
+    margin: 0 12px;
+    padding: 10px 18px;
+    text-decoration: none;
+    background: #007bff;
+    color: white;
+    border-radius: 8px;
+    transition: 0.25s;
+    font-weight: 500;
+}
+
+.site-header nav a:hover {
+    background: #339cff;
+    transform: translateY(-2px);
+}
+
+/* active in dark mode */
+.dark-mode .site-header {
+    background: #1a1a1a;
+}
+.dark-mode .site-header nav a {
+    background: #005fcc;
+}
+
+/* ===============================
+   LOGO
+=============================== */
+.logo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0px 0px 15px rgba(0, 132, 255, 0.7);
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: bold;
+    color: white;
+    margin-left: 10px;
+}
+
+.dark-mode .logo-text {
+    color: #e3e3e3;
+}
+
+/* ===============================
+   DARK TOGGLE
+=============================== */
+.dark-btn {
+    background: none;
+    border: none;
+    font-size: 26px;
+    cursor: pointer;
+    color: white;
+}
+.dark-mode .dark-btn {
+    color: gold;
+}
+
+/* ===============================
+   MAIN CONTENT
+=============================== */
+main {
+    flex: 1;
+}
+
+.fade-in {
+    animation: fade 0.5s ease-in;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===============================
+   BUTTONS
+=============================== */
+.btn-primary {
+    background: #007bff !important;
+    border-radius: 10px !important;
+    padding: 14px !important;
+    font-size: 18px !important;
+    border: none !important;
+    transition: 0.25s !important;
+}
+
+.btn-primary:hover {
+    background: #339cff !important;
+    transform: translateY(-2px);
+}
+
+/* Red Logout button */
+.logout-btn {
+    background: #e63946 !important;
+}
+.logout-btn:hover {
+    background: #ff5b6b !important;
+}
+
+/* ===============================
+   FOOTER
+=============================== */
+.site-footer {
+    text-align: center;
+    padding: 15px;
+    background: #333;
+    color: white;
+    margin-top: auto;
+    width: 100%;
+}
+
+.dark-mode .site-footer {
+    background: #1a1a1a;
+}
+
+/* ------ General Page Styling ------ */
+.page-title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    color: var(--text);
+}
+
+/* ------ Auth Home Page ------ */
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 70vh;
+    border-radius: 18px;
+}
+
+.auth-card {
+    background: var(--card-bg);
+    padding: 40px;
+    width: 420px;
+    border-radius: 18px;
+    border-color: #ddd;
+    text-align: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.auth-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+}
+
+.auth-subtitle {
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.main-btn {
+    background: #007bff;
+    color: white !important;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+    transition: 0.3s;
+}
+.main-btn:hover {
+    background: #0056c7;
+}
+
+.main-btn-outline {
+    border: 2px solid #007bff;
+    color: #007bff !important;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 18px;
+}
+.main-btn-outline:hover {
+    background: #007bff;
+    color: white !important;
+}
+
+/* ------ Ideas Page ------ */
+.ideas-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding-bottom: 30px;
+}
+
+.idea-card {
+    padding: 25px;
+    background: var(--card-bg);
+    border-radius: 15px;
+    transition: 0.25s;
+}
+.idea-card:hover {
+    transform: translateY(-5px);
+}
+
+.idea-title {
+    color: var(--text);
+    font-weight: 700;
+    font-size: 22px;
+}
+
+.idea-category .badge {
+    font-size: 14px;
+    padding: 6px 10px;
+}
+
+.idea-stats {
+    margin-top: 10px;
+    font-size: 18px;
+    color: var(--text-secondary);
+}
+
+.view-btn {
+    background: #007bff;
+    color: white !important;
+    padding: 10px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+/* Animations */
+.fade-in {
+    animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity:0; transform:translateY(10px); }
+    to   { opacity:1; transform:translateY(0); }
+}
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+}
+
+.auth-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 30px;
+    border-radius: 20px;
+    text-align: center;
+}
+
+/* Glass effect */
+.glass-card {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0px 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Titles */
+.auth-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.auth-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+/* Inputs */
+.auth-input {
+    border-radius: 10px;
+    padding: 12px;
+    border: 1px solid #bbb;
+}
+
+/* Buttons */
+.auth-btn {
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+}
+
+/* Links */
+.auth-links {
+    margin-top: 18px;
+}
+
+.auth-links a {
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.auth-links a:hover {
+    text-decoration: underline;
+}
+
+/* Back link */
+.back-link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #333;
+}
+
+/* Animation */
+.fade-in {
+    animation: fade 0.55s ease-in-out;
+}
+
+@keyframes fade {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+
+/* DARK MODE */
+body.dark-mode .glass-card {
+    background: rgba(15, 15, 15, 0.45);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .auth-subtitle {
+    color: #ddd;
+}
+
+body.dark-mode .back-link {
+    color: #ddd;
+}
+
+body.dark-mode .auth-input {
+    background: #222;
+    color: #fff;
+    border-color: #444;
+}
+/* Page title style */
+.page-title {
+    font-weight: 700;
+    font-size: 28px;
+    color: #1a1a1a;
+}
+
+/* Search Bar */
+.search-input {
+    border-radius: 8px;
+    padding: 10px 14px;
+}
+
+/* Card */
+.idea-card {
+    background: white;
+    padding: 20px;
+    border-radius: 14px;
+    transition: all 0.25s ease-in-out;
+    border: 1px solid #e7e7e7;
+}
+
+.idea-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.08);
+}
+
+/* Idea title */
+.idea-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #0d6efd;
+}
+
+/* Category badge */
+.idea-category {
+    background: #e9f2ff;
+    color: #0d6efd;
+    font-size: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+}
+
+/* Description */
+.idea-desc {
+    color: #444;
+    margin: 15px 0;
+    font-size: 15px;
+    line-height: 1.5;
+    min-height: 65px;
+}
+
+/* Footer inside card */
+.idea-footer {
+    margin-top: 10px;
+}
+
+.idea-score {
+    color: #ffae00;
+    font-weight: 600;
+    font-size: 15px;
+}
+
+/* Button */
+.view-btn {
+    border-radius: 8px;
+}
+
+/* Dark mode support */
+.dark-mode .idea-card {
+    background: #2b2b2b;
+    color: #eee;
+    border-color: #555;
+}
+
+.dark-mode .idea-category {
+    background: #3a3f55;
+    color: #9bbcff;
+}
+
+.dark-mode .page-title {
+    color: #fff;
+}
+
+.dark-mode .idea-desc {
+    color: #ddd;
+}
+
+.dark-mode .view-btn {
+    border-color: #9bbcff;
+    color: #9bbcff;
+}
+/* ===== Auth Home Window (Welcome Box) ===== */
+.auth-home-box {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+    border: 1px solid rgba(0,0,0,0.15);
+    transition: 0.3s ease;
+}
+
+/* Dark mode version */
+.dark-mode .auth-home-box {
+    background: rgba(25, 25, 25, 0.65);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 28px rgba(255,255,255,0.05);
+}
+/* SUBMIT IDEA PAGE */
+.submit-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 75vh;
+}
+
+.submit-card {
+    width: 100%;
+    max-width: 550px;
+    padding: 35px;
+    border-radius: 20px;
+    text-align: left;
+}
+
+/* Titles */
+.submit-title {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.submit-subtitle {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 25px;
+}
+
+/* Inputs */
+.input-box {
+    border-radius: 12px;
+    padding: 12px;
+    border: 1px solid #ccc;
+}
+
+/* Dark mode adjustments */
+.dark-mode .submit-card {
+    background: rgba(20,20,20,0.4);
+    color: white;
+}
+
+.dark-mode .input-box {
+    background: #222;
+    border-color: #444;
+    color: white;
+}
+.glass-box {
+    background: rgba(255,255,255,0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+.dark-mode .glass-box {
+    background: rgba(30,30,30,0.35);
+    border: 1px solid rgba(255,255,255,0.1);
+}
+.glass-box {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 15px;
+}
+
+.dark-mode .glass-box {
+    background: rgba(20, 20, 20, 0.45);
+    border-color: rgba(255,255,255,0.1);
+}
+
+.category-card {
+    background: var(--card-bg);
+    border: 1px solid #e5e5e5;
+    transition: 0.25s;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.dark-mode .category-card {
+    background: #2b2b2b;
+    border-color: #555;
+}
+/* ===============================
+   ADMIN DASHBOARD
+=============================== */
+
+.admin-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+.admin-card {
+    padding: 25px;
+    border-radius: 18px;
+    text-align: center;
+    transition: 0.25s;
+}
+
+.admin-card:hover {
+    transform: translateY(-6px);
+}
+
+.admin-card-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.admin-card-text {
+    color: var(--text-secondary);
+    min-height: 50px;
+}
+
+/* Admin Button */
+.admin-btn {
+    background: #007bff;
+    color: white !important;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+.admin-btn:hover {
+    background: #005fcc;
+    transform: scale(1.03);
+}
+
+/* Dark Mode */
+.dark-mode .admin-card {
+    background: rgba(30, 30, 30, 0.6);
+    color: #e3e3e3;
+}
+
+.dark-mode .admin-card-text {
+    color: #cfcfcf;
+}
+.idea-title-large {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text);
+}
+
+.idea-category-pill {
+    background: #e9f2ff;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #0d6efd;
+}
+
+.dark-mode .idea-category-pill {
+    background: #2b3550;
+    color: #9bbcff;
+}
+
+.stat-number {
+    font-size: 32px;
+    font-weight: 800;
+}
+
+.stat-label {
+    color: var(--text-secondary);
+}
+
+.idea-description p {
+    font-size: 16px;
+    color: var(--text);
+}
+
+.comment-box {
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+}
+
+.dark-mode .comment-box {
+    background: rgba(40,40,40,0.6);
+}
+
+.comment-score {
+    float: right;
+    background: #ffe29a;
+    padding: 2px 8px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+

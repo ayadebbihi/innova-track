@@ -1,0 +1,43 @@
+
+{% extends "base.html" %}
+{% block content %}
+
+<div class="admin-container fade-in">
+
+    <h2 class="page-title text-center mb-4">🛠 Admin Dashboard</h2>
+
+    <div class="row g-4 justify-content-center">
+
+        <!-- MANAGE USERS -->
+        <div class="col-md-4">
+            <div class="admin-card glass-card shadow-lg">
+                <h4 class="admin-card-title">👥 Manage Users</h4>
+                <p class="admin-card-text">View, edit roles and manage all registered users.</p>
+                  <a href="/admin"class="btn admin-btn w-100 mt-3">Go to Users</a>
+            </div>
+        </div>
+
+        <!-- MANAGE CATEGORIES -->
+        <div class="col-md-4">
+            <div class="admin-card glass-card shadow-lg">
+                <h4 class="admin-card-title">📚 Manage Categories</h4>
+                <p class="admin-card-text">Add, edit, and remove categories.</p>
+
+                <a href="/manage_categories" class="btn admin-btn w-100 mt-3">Go to Categories</a>
+            </div>
+        </div>
+
+        <!-- MANAGE IDEAS -->
+        <div class="col-md-4">
+            <div class="admin-card glass-card shadow-lg">
+                <h4 class="admin-card-title">💡 Manage Ideas</h4>
+                <p class="admin-card-text">View or delete ideas submitted by users.</p>
+
+                <a href="/ideas" class="btn admin-btn w-100 mt-3">View Ideas</a>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

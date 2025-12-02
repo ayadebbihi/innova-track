@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container fade-in">
+    <div class="submit-card glass-card shadow-lg mx-auto">
+
+        <h2 class="submit-title mb-3 text-center">📝 Submit a New Idea</h2>
+
+        <!-- FORM -->
+        <form id="submitForm" action="/submit" method="post">
+{% if error %}
+<div class="alert alert-danger shadow-sm mb-3">
+    {{ error }}
+</div>
+{% endif %}
+
+            <!-- Title -->
+            <label class="form-label mt-2">Title</label>
+            <input type="text"
+                   name="title"
+                   id="titleField"
+                   class="form-control form-input"
+                   value="{{ saved_title }}"
+                   required>
+
+            <!-- Description -->
+            <label class="form-label mt-3">Description</label>
+            <textarea name="description"
+                      id="descField"
+                      rows="5"
+                      class="form-control form-input"
+                      required>{{ saved_desc }}</textarea>
+
+            <!-- Category -->
+            <label class="form-label mt-3">Category</label>
+            <select name="category_id"
+                    id="catField"
+                    class="form-select form-input">
+                {% for c in categories %}
+                <option value="{{ c.category_id }}"
+                    {% if saved_cat == (c.category_id|string) %} selected {% endif %}>
+                    {{ c.name }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary w-100 mt-4">
+                Submit Idea
+            </button>
+        </form>
+
+        <!-- ADD CATEGORY BUTTON -->
+        <form id="rememberForm"
+              action="/remember_form_before_category"
+              method="POST">
+
+            <input type="hidden" name="title" id="remember_title">
+            <input type="hidden" name="description" id="remember_description">
+            <input type="hidden" name="category_id" id="remember_category">
+
+            <button type="button"
+                    class="btn btn-secondary w-100 mt-3"
+                    id="addCategoryBtn">
+                ➕ Add New Category
+            </button>
+        </form>
+
+        <div class="text-center mt-3">
+            <a href="/ideas" class="btn btn-outline-dark">← Back to Ideas</a>
+        </div>
+
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+document.getElementById("addCategoryBtn").addEventListener("click", function () {
+
+    document.getElementById("remember_title").value =
+        document.getElementById("titleField").value;
+
+    document.getElementById("remember_description").value =
+        document.getElementById("descField").value;
+
+    document.getElementById("remember_category").value =
+        document.getElementById("catField").value;
+
+    document.getElementById("rememberForm").submit();
+});
+</script>
+
+{% endblock %}

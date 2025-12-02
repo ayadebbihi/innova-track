@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+    
+    <style>
+       
+        a {
+            display: block;
+            padding: 12px;
+            margin: 12px;
+            background: #ced1d4;
+            color: rgb(3, 3, 3);
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 18px;
+          
+        }
+        a:hover {
+            background: #073362;
+        }
+    </style>
+
+<div class="auth-container fade-in">
+
+    <div class="auth-card auth-home-box shadow-lg">
+
+        <h1 class="auth-title">Welcome 👋</h1>
+        <p class="auth-subtitle">Choose how you want to continue:</p>
+
+        <a href="/login" >Login</a>
+        <a href="/register" >Create New Account</a>
+
+    </div>
+
+</div>
+
+{% endblock %}

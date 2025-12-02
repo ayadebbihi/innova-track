@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container py-4 fade-in">
+
+    <!-- Header -->
+    <div class="glass-strong card shadow-lg border-0 mb-4 p-4 text-center rounded-4">
+        <h2 class="edit-title mb-1">✏️ Edit Idea</h2>
+        <p class="edit-subtitle text-muted">Update your idea details below</p>
+    </div>
+
+    <!-- Edit Form -->
+    <div class="glass-card shadow-lg p-4 rounded-4">
+
+        {% if error %}
+        <div class="alert alert-danger text-center fw-bold mb-3">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('edit_idea', idea_id=idea.id) }}" method="POST" class="mt-2">
+
+            <!-- Title -->
+            <label class="form-label fw-semibold">Title</label>
+            <input type="text" name="title" class="form-control form-control-lg mb-3"
+                   value="{{ idea.title }}" required>
+
+            <!-- Category -->
+            <label class="form-label fw-semibold">Category</label>
+            <select name="category_id" class="form-select form-select-lg mb-3" required>
+                <option value="">Select category...</option>
+                {% for cat in categories %}
+                    <option value="{{ cat.category_id }}"
+                        {% if idea.category_id == cat.category_id %}selected{% endif %}>
+                        {{ cat.name }}
+                    </option>
+                {% endfor %}
+            </select>
+
+            <!-- Description -->
+            <label class="form-label fw-semibold">Description</label>
+            <textarea name="description" rows="5" class="form-control mb-4"
+                      required>{{ idea.description }}</textarea>
+
+            <!-- Buttons -->
+            <div class="d-flex justify-content-between mt-4">
+
+                <a href="{{ url_for('view_idea', id=idea.id) }}"
+                   class="btn btn-secondary px-4 py-2 rounded-3">
+                    ← Cancel
+                </a>
+
+                <button class="btn btn-primary px-4 py-2 rounded-3 fw-bold">
+                    Save Changes ✔
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+</div>
+
+<style>
+/* Stronger Glass Effect */
+.glass-strong {
+    background: rgba(255, 255, 255, 0.22);
+    backdrop-filter: blur(22px) saturate(160%);
+    -webkit-backdrop-filter: blur(22px) saturate(160%);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+/* Regular glass card */
+.glass-card {
+    background: rgba(255, 255, 255, 0.18);
+    backdrop-filter: blur(18px);
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.28);
+}
+
+/* Dark mode improvements */
+.dark-mode .glass-strong,
+.dark-mode .glass-card {
+    background: rgba(30, 30, 30, 0.55);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Input styling */
+.form-control, .form-select {
+    background: rgba(255,255,255,0.65);
+    border-radius: 10px;
+}
+.dark-mode .form-control, .dark-mode .form-select {
+    background: rgba(20,20,20,0.7);
+    color: #fff;
+}
+
+/* Fade in */
+.fade-in {
+    animation: fadeIn 0.35s ease-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+/* Dark Mode Fix for Edit Idea Headings */
+.dark-mode .edit-title,
+.dark-mode .edit-subtitle {
+    color: #ffffff !important; /* يجعل النص أبيض وواضح */
+    text-shadow: 0 0 4px rgba(255,255,255,0.3); /* يزيد الوضوح */
+}
+
+</style>
+
+{% endblock %}

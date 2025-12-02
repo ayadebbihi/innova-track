@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h2 class="page-title mb-4 text-center">👥 Manage Users</h2>
+
+<div class="table-responsive glass-card p-4 shadow-lg rounded">
+
+<table class="table table-hover align-middle">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Role</th>
+            <th>Change Role</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for u in users %}
+        <tr>
+            <td>{{ u.user_id }}</td>
+            <td>{{ u.username }}</td>
+            <td>{{ u.email }}</td>
+            <td><span class="badge bg-primary">{{ u.role }}</span></td>
+
+            <td>
+                {% if u.role == "admin" %}
+                    <span class="text-muted">Cannot change admin role</span>
+                {% else %}
+                    <form action="/change_role/{{ u.user_id }}" method="POST" class="d-flex">
+                        <select name="new_role" class="form-select form-select-sm me-2">
+                            <option value="submitter">Submitter</option>
+                            <option value="reviewer">Reviewer</option>
+                        </select>
+
+                        <button class="btn btn-sm btn-success">Update</button>
+                    </form>
+                {% endif %}
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
