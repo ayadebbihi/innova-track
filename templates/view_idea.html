@@ -4,7 +4,7 @@
 <div class="glass-container ">
 
     <!-- HEADER -->
-    <div class="glass-card-3d mb-4">
+    <div class="card p-3 mb-4 w-100">
         <div class="header-top">
             <div>
                 <h2 class="idea-title">{{ idea.title }}</h2>
@@ -13,6 +13,11 @@
                     <span class="separator">•</span>
                     <span class="date-text">{{ idea_time }}</span>
                 </div>
+                <div class="submitter-box">
+        <span class="submitter-label">Submitted by : </span>
+        👤 <span class="submitter-name">{{ idea.submitter_username or "Unknown User" }}</span>
+    </div>
+            
             </div>
 
             <div class="rating-summary">
@@ -290,7 +295,7 @@
     display: flex;
     justify-content: space-between;
 }
-.time { color: #bbb; font-size: 12px; }
+.time { color: #424242; font-size: 12px; }
 .comment-text { margin-top: 10px; font-size: 15px; }
 
 .reply-btn {
@@ -363,4 +368,28 @@ function toggleReply(id){
     transition: none !important;
 }
 </style>
+<style>
+.submitter-box {
+    text-align: right;
+    font-size: 0.85rem;
+}
+
+.submitter-label {
+    color: var(--bs-secondary-color, #000000);
+    margin-right: 4px;
+}
+
+.submitter-name {
+    font-weight: bold;
+    color: #c89b00; /* الذهب */
+}
+
+/* يجعل الذهب واضح في الدارك مود */
+@media (prefers-color-scheme: dark) {
+    .submitter-name {
+        color: #f5c542;
+    }
+}
+</style>
+
 {% endblock %}

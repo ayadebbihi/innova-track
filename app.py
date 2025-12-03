@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for, abort
+from flask import Flask, render_template, request, redirect, session, url_for, flash
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
@@ -404,10 +404,15 @@ def ideas():
 
     if search:
         c.execute("""
-            SELECT ideas.id, ideas.title, categories.name AS category, ideas.submission_date
-            FROM ideas
+            SELECT ideas.id, ideas.title, ideas.description, 
+       categories.name AS category,
+       ideas.submission_date, 
+       ideas.submitter_id,
+       users.username AS submitter_name
+       FROM ideas
             LEFT JOIN categories ON ideas.category_id = categories.category_id
-            WHERE ideas.title LIKE ? OR ideas.description LIKE ?
+            LEFT JOIN users ON ideas.submitter_id = users.user_id
+            WHERE ideas.id = ?
         """, (f"%{search}%", f"%{search}%"))
     else:
         c.execute("""
@@ -461,9 +466,10 @@ def view_idea(id):
     # ──────────────────────────────
     c.execute("""
         SELECT ideas.id, ideas.title, ideas.description, ideas.submission_date,
-               categories.name AS category, ideas.submitter_id
+               categories.name AS category, ideas.submitter_id,users.username AS submitter_username
         FROM ideas
         LEFT JOIN categories ON ideas.category_id = categories.category_id
+        LEFT JOIN users ON ideas.submitter_id = users.user_id
         WHERE ideas.id = ?
     """, (id,))
     
@@ -542,7 +548,8 @@ def view_idea(id):
         score=score,
         avg_stars=avg_stars,
         user_stars=user_stars,         # ← عدد النجوم الخاصة بالمستخدم فقط
-        comments=comments
+        comments=comments,
+        
     )
 
 
@@ -782,33 +789,6 @@ def admin_dashboard():
 
     return render_template("admin_dashboard.html", users=users)
 
-@app.route("/admin/delete_user/<int:user_id>", methods=["POST"])
-def delete_user(user_id):
-    if "user_id" not in session:
-        return redirect("/login")
-
-    if session.get("role") != "admin":
-        return "<h3 style='color:red;'>Access denied</h3>"
-
-    conn = get_db()
-    c = conn.cursor()
-
-    if user_id == session["user_id"]:
-        conn.close()
-        return "<h3 style='color:red;'>You cannot delete yourself!</h3><a href='/admin'>Back</a>"
-
-    try:
-        c.execute("DELETE FROM comments WHERE user_id = ?", (user_id,))
-        c.execute("DELETE FROM votes WHERE user_id = ?", (user_id,))
-    except:
-        pass
-
-    c.execute("DELETE FROM users WHERE user_id = ?", (user_id,))
-    conn.commit()
-    conn.close()
-
-    return redirect("/admin")
-
 @app.route("/comment_vote/<int:comment_id>/<action>")
 def comment_vote(comment_id, action):
     if "user_id" not in session:
@@ -852,11 +832,27 @@ def comment_vote(comment_id, action):
 
     return redirect(request.referrer)
 
+@app.route("/admin/delete_user/<int:user_id>", methods=["POST"])
+def delete_user(user_id):
+    if session.get("role") != "admin":
+        return "Unauthorized!", 403
+
+    conn = get_db()
+    c = conn.cursor()
+
+    # لا نحذف الأفكار الخاصة باليوزر
+    c.execute("DELETE FROM users WHERE user_id = ?", (user_id,))
+    conn.commit()
+    conn.close()
+
+    flash("User deleted successfully.", "success")
+    return redirect(url_for("admin_panel"))
 
 # ---------------- Home redirect ----------------
 @app.route("/")
 def home():
-    return redirect("/ideas")
+    return render_template("auth_home.html")
+
 
 # ---------------- Run ----------------
 if __name__ == "__main__":
