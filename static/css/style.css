@@ -676,3 +676,22 @@ body.dark-mode .auth-input {
     font-size: 13px;
 }
 
+/* إصلاح الهيدر في الهاتف فقط */
+@media (max-width: 600px) {
+    .navbar-brand {
+        font-size: 18px !important;
+        margin-bottom: 4px;
+        text-align: center;
+        width: 100%;
+    }
+
+    .navbar-nav {
+        flex-direction: column !important;
+        text-align: center;
+        width: 100%;
+    }
+
+    .navbar-nav .nav-item {
+        margin: 4px 0 !important;
+    }
+}
